@@ -1,18 +1,10 @@
-import  *  as restify from 'restify';
+import {Server} from './src/server/server'
 
-const server = restify.createServer({
-    name: 'meat-api',
-    version: '1.0.0'
-});
-
-server.use(restify.plugins.queryParser());
-
-server.get('/hello', (req, res, next) => {
-   res.header('contentType', 'application/json');
-   res.send({message: 'hello'});
-  return next();
-});
-
-server.listen(3000, () => {
-  console.log('meat-api is running in 3000 port');
+const server = new Server();
+server.bootstrap().then(server => {
+  console.log('Server is listening on:', server.aplication.address);
+}).catch(error => {
+  console.log('Server failed to start');
+  console.error(error);
+  process.exit(1);
 });
