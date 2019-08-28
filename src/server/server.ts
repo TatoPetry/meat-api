@@ -8,7 +8,7 @@ export class Server {
         return new Promise((resolve, reject) => {
             try {
 
-                this.aplication = restify.createServer({
+                this.aplication = restify.createServer({it 
                     name: 'meat-api',
                     version: '1.0.0'
                 });
@@ -22,14 +22,12 @@ export class Server {
 
                 this.aplication.listen(3000, () => {
                     resolve(this.aplication);
-                  });
-                  
+                  });                  
 
             }catch(error) {
                 reject(error);
             }
         });
-
     }
 
     bootstrap(): Promise<Server>{
