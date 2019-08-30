@@ -1,14 +1,23 @@
-const users = [
-    {name: 'Josefino', email: 'josefino@gmail.com'},
-    {name: 'Mariano', email: 'josefino@gmail.com'},
-    {name: 'Creyson', email: 'josefino@gmail.com'},
-    {name: 'Mathias', email: 'josefino@gmail.com'},
-    {name: 'Pau', email: 'josefino@gmail.com'}
-]
+import * as mongoose from 'mongoose';
 
-export class User {
-    static findAll(): Promise<any> {
-        return Promise.resolve(users);
-
-    }
+export interface User extends mongoose.Document {
+    name: string;
+    email: string;
+    password: string;
 }
+
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String
+    },
+    email: {
+        type: String,
+        unique: true
+    },
+    password: {
+        type: String,
+        select: false
+    }
+});
+
+export const User = mongoose.model<User>('User', userSchema);
